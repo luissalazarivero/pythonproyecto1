@@ -1,13 +1,13 @@
 import os
 from time import sleep
 """
-PROYECTO1:CRUD DE EMPRESAS
+PROYECTO 1 : CRUD DE EMPRESAS
 NOMBRE : LUIS SALAZAR RIVERO
 """
 
-dic_alumnos = {
+dic_empresas = {
     '100':{
-        'razon_social':'TECUSP',
+        'razon_social':'TECSUP',
         'direccion' : 'CALLE PERU 123'
     }
 }
@@ -19,10 +19,10 @@ while(True):
     print(" " * 10 + "GESTIÓN DE EMPRESAS")
     print("="*ANCHO)
     print("""
-         [1] REGISTRAR ALUMNO
-         [2] MOSTRAR ALUMNOS
-         [3] ACTUALIZAR ALUMNO
-         [4] ELIMINAR ALUMNO
+         [1] REGISTRAR EMPRESA
+         [2] MOSTRAR EMPRESAS
+         [3] ACTUALIZAR EMPRESA
+         [4] ELIMINAR EMPRESA
          [5] SALIR
           """)
     print("=" * ANCHO)
@@ -30,58 +30,67 @@ while(True):
     os.system("clear")
     if opcion == 1:
         print("=" * ANCHO)
-        print(" " * 10 + "REGISTRAR ALUMNO")
+        print(" " * 10 + "REGISTRAR EMPRESA")
         print("=" * ANCHO)
         
-        dni = input("Ingrese DNI: ")
-        nombre = input("Ingrese Nombre: ")
-        email = input("Ingrese Email: ")
-        dic_nuevo_alumno = {
-            'nombre': nombre,
-            'email': email
+        ruc = input("INGRESE RUC : ")
+        razon_social = input("INGRESE RAZÓN SOCIAL : ")
+        direccion = input("INGRESE DIRECCIÓN : ")
+        dic_nueva_empresa = {
+            'razon_social' : razon_social,
+            'direccion' : direccion
         }
-        dic_alumnos[dni] = dic_nuevo_alumno
-        print("Alumno registrado existosamente")
+        dic_empresas[ruc] = dic_nueva_empresa
+        print("EMPRESA REGISTRADA CON ÉXITO")
+
     elif opcion == 2:
         print("=" * ANCHO)
-        print(" " * 10 + "MOSTRAR ALUMNO")
+        print(" " * 10 + "MOSTRAR EMPRESA")
         print("=" * ANCHO)
-        for dni,info in dic_alumnos.items():
-            print(f"DNI : {dni}")
-            print(f"Nombre : {info['nombre']}")
-            print(f"Email : {info['email']}")
-            print('*' * ANCHO)
+
+        for ruc,info in dic_empresas.items():
+            print(f"RUC : {ruc} ")
+            print(f"RAZÓN SOCIAL : {info['razon_social']}")
+            print(f"DIRECCIÓN : {info['direccion']}")
+            print("-" * ANCHO)
+            
     elif opcion == 3:
         print("=" * ANCHO)
-        print(" " * 10 + "ACTUALIZAR  ALUMNO")
+        print(" " * 10 + "ACTUALIZAR  EMPRESA")
         print("=" * ANCHO)
-        dni = input("Ingrese DNI del alumno a actualizar : ")
-        if dni in dic_alumnos:
-            print(f"Alumno Encontrado : {dic_alumnos[dni]['nombre']}")
-            nuevo_nombre = input(f"NUEVO NOMBRE({dic_alumnos[dni]['nombre']}) : ")
-            nuevo_email = input(f"NUEVO EMAIL({dic_alumnos[dni]['email']}) : ")
-            if nuevo_nombre:
-                dic_alumnos[dni]['nombre'] = nuevo_nombre
-            if nuevo_email:
-                dic_alumnos[dni]['email'] = nuevo_email
-            print("ALUMNO ACTUALIZADO EXITOSAMENTE!!!")
+        ruc = input("INGRESE RUC DE LA EMPRESA A ACTUALIZAR : ")
+        if ruc in dic_empresas:
+            print(f'RAZÓN SOCIAL ACTUAL : {dic_empresas[ruc]["razon_social"]}')
+            nueva_razon_social = input(f"INGRESE NUEVA RAZÓN SOCIAL ({dic_empresas[ruc]['razon_social']}) :")
+            nueva_direccion = input(f"INGRESE NUEVA DIRECCIÓN ({dic_empresas[ruc]['direccion']}) :")
+            if nueva_razon_social:
+                dic_empresas[ruc]['razon_social'] = nueva_razon_social
+            if nueva_direccion:
+                dic_empresas[ruc]['direccion'] = nueva_direccion
+            print("EMPRESA ACTUALIZADA CON ÉXITO")
         else:
-            print('No se econtro el alumno para el DNI ingresado')
+            print("RUC NO ENCONTRADO")
+       
     elif opcion == 4:
         print("=" * ANCHO)
-        print(" " * 10 + "ELIMINAR ALUMNO")
+        print(" " * 10 + "ELIMINAR EMPRESA")
         print("=" * ANCHO)
-        dni = input("Ingrese DNI del alumno a actualizar : ")
-        if dni in dic_alumnos:
-            del dic_alumnos[dni]
-            print('ALUMNO ELIMINADO EXITOSAMENTE')
+        
+        ruc = input("INGRESE RUC DE LA EMPRESA A ELIMINAR : ")
+        if ruc in dic_empresas:
+            print(f"EMPRESA({dic_empresas[ruc]['razon_social']}) SE ELIMINARÁ")
+            print("-" * ANCHO)    
+            del dic_empresas[ruc]
+            print(f"EMPRESA ELIMINADA CON ÉXITO")    
         else:
-            print('No se econtro el alumno para el DNI ingresado')
+            print("EMPRESA PARA EL RUC QUE INGRESO NO ENCONTRADO")    
     elif opcion == 5:
         print("=" * ANCHO)
         print(" " * 10 + "SALIENDO DEL PROGRAMA")
         print("=" * ANCHO)
         sleep(2)
         break
+    else:
+        print("OPCIÓN NO VÁLIDA")
     
     input("Presione ENTER para continuar...")
